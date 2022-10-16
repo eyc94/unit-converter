@@ -7,7 +7,7 @@ const App = () => {
     <div>
       <Title />
       <Alert severity="info">
-        You can now clear your input and result boxes. Try it below!
+        You can now clear your input and result boxes with the Reset button. Try it below!
       </Alert>
       <UnitConverterBox />
     </div>
