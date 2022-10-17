@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { confirmAlert } from 'react-confirm-alert';
 import ReactTooltip from "react-tooltip";
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -8,6 +8,10 @@ const UnitForm = () => {
   const [convertedUnit, setConvertedUnit] = useState('');
   const [selectedFirstUnit, setSelectedFirstUnit] = useState('');
   const [selectedSecondUnit, setSelectedSecondUnit] = useState('');
+
+  useEffect(() => {
+    setConvertedUnit('');
+  }, [originalUnit]);
 
   let conversionRatio = 1.0;
   if (selectedFirstUnit === "inch") {
