@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { confirmAlert } from 'react-confirm-alert';
+import ReactTooltip from "react-tooltip";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const UnitForm = () => {
@@ -284,9 +285,14 @@ const UnitForm = () => {
           <label>From:</label>
           <div>
             <input
+              data-tip
+              data-for="convertFrom"
               value={originalUnit}
               onChange={handleUnitConvert}
             />
+            <ReactTooltip id="convertFrom" place="top" effect="solid">
+              Choose unit to convert from
+            </ReactTooltip>
             <select value={selectedFirstUnit} onChange={handleFirstUnitChange} className="form-select-sm mb-3">
               <option value="" defaultChecked>Choose Unit</option>
               <option value="inch">inch</option>
@@ -307,9 +313,14 @@ const UnitForm = () => {
           <label>To:</label>
           <div>
             <input
+              data-tip
+              data-for="convertTo"
               value={convertedUnit}
               readOnly={true}
             />
+            <ReactTooltip id="convertTo" place="top" effect="solid">
+              Result of conversion
+            </ReactTooltip>
             <select value={selectedSecondUnit} onChange={handleSecondUnitChange} className="form-select-sm mb-3">
               <option value="" defaultChecked>Choose Unit</option>
               <option value="inch">inch</option>
