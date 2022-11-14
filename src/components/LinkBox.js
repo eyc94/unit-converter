@@ -16,13 +16,19 @@ const LinkBox = ({ selectedUnit }) => {
     }
   }, [selectedUnit]);
 
-  return (
-    <div>
-      To learn more about <em>{selectedUnit}</em>:
+  if (link !== '') {
+    return (
       <div>
-        <a href={link}>{link}</a>
+        To learn more about <em>{selectedUnit}</em>:
+        <div>
+          <a href={link}>{link}</a>
+        </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <></>
   );
 };
 
