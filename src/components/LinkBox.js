@@ -21,7 +21,7 @@ const LinkBox = ({ selectedUnit }) => {
       <div>
         To learn more about <em>{selectedUnit}</em>:
         <div>
-          <a href={link}>{link}</a>
+          <a target="_blank" href={link}>{link}</a>
         </div>
       </div>
     );
