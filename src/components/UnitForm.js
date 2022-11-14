@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { confirmAlert } from 'react-confirm-alert';
 import ReactTooltip from "react-tooltip";
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import LinkBox from "./LinkBox";
 
 const UnitForm = () => {
   const [originalUnit, setOriginalUnit] = useState('');
@@ -11,7 +12,7 @@ const UnitForm = () => {
 
   useEffect(() => {
     setConvertedUnit('');
-  }, [originalUnit]);
+  }, [originalUnit, selectedFirstUnit, selectedSecondUnit]);
 
   let conversionRatio = 1.0;
   if (selectedFirstUnit === "inch") {
@@ -311,6 +312,7 @@ const UnitForm = () => {
               <option value="yard">yard</option>
             </select>
           </div>
+          <LinkBox selectedUnit={selectedFirstUnit} />
         </div>
 
         <div className="col-md-6">
@@ -339,6 +341,7 @@ const UnitForm = () => {
               <option value="yard">yard</option>
             </select>
           </div>
+          <LinkBox selectedUnit={selectedSecondUnit} />
         </div>
       </div>
       
