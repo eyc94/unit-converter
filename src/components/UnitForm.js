@@ -267,6 +267,13 @@ const UnitForm = () => {
     });
   };
 
+  const handleFlipButton = () => {
+    let firstUnit = selectedFirstUnit;
+    let secondUnit = selectedSecondUnit;
+    setSelectedFirstUnit(secondUnit);
+    setSelectedSecondUnit(firstUnit);
+  }
+
   const handleFirstUnitChange = (event) => {
     setSelectedFirstUnit(event.target.value);
   };
@@ -283,10 +290,14 @@ const UnitForm = () => {
     'marginBottom': 5
   };
 
+  const secondColStyle = {
+    'marginTop': 22
+  };
+
   return(
     <div className="container">
       <div className="row" style={firstRowStyle}>
-        <div className="col-md-6">
+        <div className="col-md-3">
           <label>From:</label>
           <div>
             <input
@@ -315,7 +326,13 @@ const UnitForm = () => {
           <LinkBox selectedUnit={selectedFirstUnit} />
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-3 text-center align-middle" style={secondColStyle}>
+          <button type="button" className="btn btn-secondary" onClick={handleFlipButton}>
+            Flip Units
+          </button>
+        </div>
+
+        <div className="col-md-3">
           <label>To:</label>
           <div>
             <input

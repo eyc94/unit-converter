@@ -10,18 +10,17 @@ const LinkBox = ({ selectedUnit }) => {
       axios
       .get(`http://127.0.0.1:5000/units/${selectedUnit}`)
       .then(response => {
-        console.log('response:', response.data.url);
         setLink(response.data.url);
       });
     }
   }, [selectedUnit]);
 
-  if (link !== '') {
+  if (link !== '' && selectedUnit !== '') {
     return (
       <div>
         To learn more about <em>{selectedUnit}</em>:
         <div>
-          <a target="_blank" href={link}>{link}</a>
+          <a rel="noreferrer" target="_blank" href={link}>{link}</a>
         </div>
       </div>
     );
