@@ -9,6 +9,7 @@ const UnitForm = () => {
   const [convertedUnit, setConvertedUnit] = useState('');
   const [selectedFirstUnit, setSelectedFirstUnit] = useState('');
   const [selectedSecondUnit, setSelectedSecondUnit] = useState('');
+  const [precision, setPrecision] = useState(2);
 
   useEffect(() => {
     setConvertedUnit('');
@@ -239,7 +240,8 @@ const UnitForm = () => {
 
   const convertUnit = (event) => {
     event.preventDefault();
-    const converted = originalUnit * conversionRatio;
+    let converted = originalUnit * conversionRatio;
+    converted = converted.toFixed(precision);
     setConvertedUnit(converted);
   };
 
@@ -282,6 +284,10 @@ const UnitForm = () => {
     setSelectedSecondUnit(event.target.value);
   };
 
+  const precisionChangeHandler = (event) => {
+    setPrecision(event.target.value);
+  }
+
   const firstRowStyle = {
     'marginBottom': 20
   };
@@ -294,8 +300,18 @@ const UnitForm = () => {
     'marginTop': 22
   };
 
+  const boxStyle = {
+    'width': 50
+  };
+
   return(
     <div className="container">
+      <div className="row">
+        <div className="col">
+          Precision: <input value={precision} type="number" onChange={precisionChangeHandler} className="mb-3" style={boxStyle} />
+        </div>
+      </div>
+
       <div className="row" style={firstRowStyle}>
         <div className="col-md-3">
           <label>From:</label>
