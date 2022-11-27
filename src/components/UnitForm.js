@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { confirmAlert } from 'react-confirm-alert';
 import ReactTooltip from "react-tooltip";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import LinkBox from "./LinkBox";
+import PrecisionBox from "./PrecisionBox";
+import ConvertButton from "./ConvertButton";
+import ResetButton from "./ResetButton";
 
 const UnitForm = () => {
   const [originalUnit, setOriginalUnit] = useState('');
@@ -238,35 +240,8 @@ const UnitForm = () => {
     }
   }
 
-  const convertUnit = (event) => {
-    event.preventDefault();
-    let converted = originalUnit * conversionRatio;
-    converted = converted.toFixed(precision);
-    setConvertedUnit(converted);
-  };
-
   const handleUnitConvert = (event) => {
     setOriginalUnit(event.target.value);
-  };
-
-  const handleResetButton = (event) => {
-    event.preventDefault();
-    confirmAlert({
-      title: 'Confirm To Reset',
-      message: 'Are you sure you want to reset your input?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            setOriginalUnit('');
-            setConvertedUnit('');
-          }
-        },
-        {
-          label: 'No'
-        }
-      ]
-    });
   };
 
   const handleFlipButton = () => {
@@ -284,33 +259,17 @@ const UnitForm = () => {
     setSelectedSecondUnit(event.target.value);
   };
 
-  const precisionChangeHandler = (event) => {
-    setPrecision(event.target.value);
-  }
-
   const firstRowStyle = {
     'marginBottom': 20
-  };
-
-  const firstButtonStyle = {
-    'marginBottom': 5
   };
 
   const secondColStyle = {
     'marginTop': 22
   };
 
-  const boxStyle = {
-    'width': 50
-  };
-
-  return(
+  return (
     <div className="container">
-      <div className="row">
-        <div className="col">
-          Precision: <input value={precision} type="number" onChange={precisionChangeHandler} className="mb-3" style={boxStyle} />
-        </div>
-      </div>
+      <PrecisionBox precision={precision} setPrecision={setPrecision} />
 
       <div className="row" style={firstRowStyle}>
         <div className="col-md-3">
@@ -377,13 +336,8 @@ const UnitForm = () => {
           <LinkBox selectedUnit={selectedSecondUnit} />
         </div>
       </div>
-      
-      <div style={firstButtonStyle}>
-        <button className="btn btn-success" onClick={convertUnit}>Convert</button>
-      </div>
-      <div>
-        <button type="button" className="btn btn-warning" onClick={handleResetButton}>Reset</button>
-      </div>
+      <ConvertButton setConvertedUnit={setConvertedUnit} originalUnit={originalUnit} conversionRatio={conversionRatio} precision={precision} />
+      <ResetButton setOriginalUnit={setOriginalUnit} setConvertedUnit={setConvertedUnit} />
     </div>
   );
 };
