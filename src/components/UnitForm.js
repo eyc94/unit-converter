@@ -5,6 +5,7 @@ import LinkBox from "./LinkBox";
 import PrecisionBox from "./PrecisionBox";
 import ConvertButton from "./ConvertButton";
 import ResetButton from "./ResetButton";
+import UnitSelectForm from "./UnitSelectForm";
 
 const UnitForm = () => {
   const [originalUnit, setOriginalUnit] = useState('');
@@ -240,7 +241,7 @@ const UnitForm = () => {
     }
   }
 
-  const handleUnitConvert = (event) => {
+  const handleUnitValueChange = (event) => {
     setOriginalUnit(event.target.value);
   };
 
@@ -279,24 +280,12 @@ const UnitForm = () => {
               data-tip
               data-for="convertFrom"
               value={originalUnit}
-              onChange={handleUnitConvert}
+              onChange={handleUnitValueChange}
             />
             <ReactTooltip id="convertFrom" place="top" effect="solid">
               Convert From
             </ReactTooltip>
-            <select value={selectedFirstUnit} onChange={handleFirstUnitChange} className="form-select-sm mb-3">
-              <option value="" defaultChecked>Choose Unit</option>
-              <option value="inch">inch</option>
-              <option value="foot">foot</option>
-              <option value="meter">meter</option>
-              <option value="kilometer">kilometer</option>
-              <option value="centimeter">centimeter</option>
-              <option value="millimeter">millimeter</option>
-              <option value="micrometer">micrometer</option>
-              <option value="nanometer">nanometer</option>
-              <option value="mile">mile</option>
-              <option value="yard">yard</option>
-            </select>
+            <UnitSelectForm unitValue={selectedFirstUnit} changeHandler={handleFirstUnitChange} />
           </div>
           <LinkBox selectedUnit={selectedFirstUnit} />
         </div>
@@ -319,19 +308,7 @@ const UnitForm = () => {
             <ReactTooltip id="convertTo" place="top" effect="solid">
               Result of conversion
             </ReactTooltip>
-            <select value={selectedSecondUnit} onChange={handleSecondUnitChange} className="form-select-sm mb-3">
-              <option value="" defaultChecked>Choose Unit</option>
-              <option value="inch">inch</option>
-              <option value="foot">foot</option>
-              <option value="meter">meter</option>
-              <option value="kilometer">kilometer</option>
-              <option value="centimeter">centimeter</option>
-              <option value="millimeter">millimeter</option>
-              <option value="micrometer">micrometer</option>
-              <option value="nanometer">nanometer</option>
-              <option value="mile">mile</option>
-              <option value="yard">yard</option>
-            </select>
+            <UnitSelectForm unitValue={selectedSecondUnit} changeHandler={handleSecondUnitChange} />
           </div>
           <LinkBox selectedUnit={selectedSecondUnit} />
         </div>
