@@ -6,6 +6,8 @@ import PrecisionBox from "./PrecisionBox";
 import ConvertButton from "./ConvertButton";
 import ResetButton from "./ResetButton";
 import UnitSelectForm from "./UnitSelectForm";
+import UnitInputForm from "./UnitInputForm";
+import FlipButton from "./FlipButton";
 
 const UnitForm = () => {
   const [originalUnit, setOriginalUnit] = useState('');
@@ -245,13 +247,6 @@ const UnitForm = () => {
     setOriginalUnit(event.target.value);
   };
 
-  const handleFlipButton = () => {
-    let firstUnit = selectedFirstUnit;
-    let secondUnit = selectedSecondUnit;
-    setSelectedFirstUnit(secondUnit);
-    setSelectedSecondUnit(firstUnit);
-  }
-
   const handleFirstUnitChange = (event) => {
     setSelectedFirstUnit(event.target.value);
   };
@@ -276,12 +271,7 @@ const UnitForm = () => {
         <div className="col-md-3">
           <label>From:</label>
           <div>
-            <input
-              data-tip
-              data-for="convertFrom"
-              value={originalUnit}
-              onChange={handleUnitValueChange}
-            />
+            <UnitInputForm tooltipId="convertForm" unitValue={originalUnit} unitValueHandler={handleUnitValueChange} readyOnly={false} />
             <ReactTooltip id="convertFrom" place="top" effect="solid">
               Convert From
             </ReactTooltip>
@@ -291,20 +281,13 @@ const UnitForm = () => {
         </div>
 
         <div className="col-md-3 text-center align-middle" style={secondColStyle}>
-          <button type="button" className="btn btn-secondary" onClick={handleFlipButton}>
-            Flip Units
-          </button>
+          <FlipButton selectedFirstUnit={selectedFirstUnit} selectedSecondUnit={selectedSecondUnit} setSelectedFirstUnit={setSelectedFirstUnit} setSelectedSecondUnit={setSelectedSecondUnit} />
         </div>
 
         <div className="col-md-3">
           <label>To:</label>
           <div>
-            <input
-              data-tip
-              data-for="convertTo"
-              value={convertedUnit}
-              readOnly={true}
-            />
+            <UnitInputForm tooltipId="convertTo" unitValue={convertedUnit} readyOnly={true} />
             <ReactTooltip id="convertTo" place="top" effect="solid">
               Result of conversion
             </ReactTooltip>
